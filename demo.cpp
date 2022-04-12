@@ -2,18 +2,18 @@
 #include <conio.h>
 #include <stdlib.h>
 #include <iostream>
-#define STACK_INIT_SIZE 100		//³õÊ¼´æ´¢¿Õ¼ä
-#define STACKINCREMENT 10		//¿Õ¼äÔöÁ¿´óĞ¡
+#define STACK_INIT_SIZE 100		//åˆå§‹å­˜å‚¨ç©ºé—´
+#define STACKINCREMENT 10		//ç©ºé—´å¢é‡å¤§å°
 using namespace std;
 
 typedef struct
 {
-	char* base;					//Õ»µ×Ö¸Õë
-	char* top;					//Õ»¶¥Ö¸Õë
-	int stacksize;				//Õ»¿ÉÓÃ×î´óÈİÁ¿
+	char* base;					//æ ˆåº•æŒ‡é’ˆ
+	char* top;					//æ ˆé¡¶æŒ‡é’ˆ
+	int stacksize;				//æ ˆå¯ç”¨æœ€å¤§å®¹é‡
 }SqStack;
 
-//³õÊ¼»¯Ò»¸öÕ»
+//åˆå§‹åŒ–ä¸€ä¸ªæ ˆ
 void IntStack(SqStack &S)
 {
 	S.base = (char*)malloc(STACK_INIT_SIZE * sizeof(char));
@@ -27,8 +27,8 @@ void IntStack(SqStack &S)
 	printf("\nStack Initialization Succeeded\n");
 }
 
-//ÈëÕ»  e
-void Push(SqStack &S, char e)			//eÎªÈëÕ»µÄÔªËØ			eg:  Push(S,11);
+//å…¥æ ˆ  e
+void Push(SqStack &S, char e)			//eä¸ºå…¥æ ˆçš„å…ƒç´ 			eg:  Push(S,11);
 {
 	if (S.top - S.base == S.stacksize)
 	{
@@ -48,42 +48,35 @@ void Push(SqStack &S, char e)			//eÎªÈëÕ»µÄÔªËØ			eg:  Push(S,11);
 	//printf("\nNewbase Crease Succeeded\n");
 }
 
-//³öÕ»
+//å‡ºæ ˆ
 char Pop(SqStack &S)
 {
-	/*
-	if (S.top == S.base)
-	{
-		printf("\nÕ»Îª¿Õ£¬É¾³ıÊ§°Ü¡£\n");
-		return '0';
-	}	
-	*/
 	--S.top;
 	char e = *(S.top);
-	//printf("\nÒÑ³É¹¦É¾³ıÕ»¶¥ÔªËØ %c\n", e);
+	//printf("\nå·²æˆåŠŸåˆ é™¤æ ˆé¡¶å…ƒç´  %c\n", e);
 	return e;
 }
 
-//È¡Õ»¶¥ÔªËØ
+//å–æ ˆé¡¶å…ƒç´ 
 char GetTop(SqStack &S)
 {
 	char e;
 	if (S.top == S.base)
 	{
-		printf("\nÕ»Îª¿Õ£¬È¡ÖµÊ§°Ü¡£\n");
+		printf("\næ ˆä¸ºç©ºï¼Œå–å€¼å¤±è´¥ã€‚\n");
 		return false;
 	}
 	e = *(S.top-1);
 	return e;
 }
 
-//·µ»ØÕ»³¤¶È
+//è¿”å›æ ˆé•¿åº¦
 int StackLength(SqStack S)
 {
 	return S.top - S.base;
 }
 
-//·µ»ØÊÇ·ñÎª¿ÕÕ»
+//è¿”å›æ˜¯å¦ä¸ºç©ºæ ˆ
 bool StackEmpty(SqStack S)
 {
 	if (StackLength(S) == 0)
@@ -92,7 +85,7 @@ bool StackEmpty(SqStack S)
 		return false;
 }
 
-//±éÀú&Êä³öÕ»
+//éå†&è¾“å‡ºæ ˆ
 int OutPut(SqStack* S) {
 	char* p;
 
@@ -101,7 +94,7 @@ int OutPut(SqStack* S) {
 		return 0;
 	}
 	p = S->top;
-	// ÓÉÕ»¶¥ÒÀ´ÎÏòÏÂ±éÀú
+	// ç”±æ ˆé¡¶ä¾æ¬¡å‘ä¸‹éå†
 	while (p > S->base) {
 		p--;
 		printf("%c ", *p);
@@ -110,52 +103,52 @@ int OutPut(SqStack* S) {
 	return 1;
 }
 
-//UI½çÃæ
+//UIç•Œé¢
 void UI(SqStack &S)
 {
 	int commend;
-	printf("ÇëÑ¡Ôñ½ÓÏÂÀ´Òª½øĞĞµÄ²Ù×÷£º\n");
+	printf("è¯·é€‰æ‹©æ¥ä¸‹æ¥è¦è¿›è¡Œçš„æ“ä½œï¼š\n");
 	printf("----------------------\n");
-	printf("1£º½«ÔªËØÑ¹Õ»\n");
-	printf("2£º³öÕ»\n");
-	printf("3£ºÈ¡Õ»¶¥ÔªËØ\n");
-	printf("4£º²é¿´Õ»³¤¶È\n");
-	printf("5£º¼ì²éÕ»ÊÇ·ñÎª¿Õ\n");
-	printf("6£º±éÀú&Êä³öÕ»ÖĞÔªËØ\n");
-	printf("0£ºÍË³ö¸Ã³ÌĞò\n");
+	printf("1ï¼šå°†å…ƒç´ å‹æ ˆ\n");
+	printf("2ï¼šå‡ºæ ˆ\n");
+	printf("3ï¼šå–æ ˆé¡¶å…ƒç´ \n");
+	printf("4ï¼šæŸ¥çœ‹æ ˆé•¿åº¦\n");
+	printf("5ï¼šæ£€æŸ¥æ ˆæ˜¯å¦ä¸ºç©º\n");
+	printf("6ï¼šéå†&è¾“å‡ºæ ˆä¸­å…ƒç´ \n");
+	printf("0ï¼šé€€å‡ºè¯¥ç¨‹åº\n");
 	commend = (int)getch() - 48;
 	system("cls");
 
 	switch (commend)
 	{
 	case 1: {
-		printf("ÇëÊäÈëÑ¹Õ»ÔªËØ¸öÊı£º");
+		printf("è¯·è¾“å…¥å‹æ ˆå…ƒç´ ä¸ªæ•°ï¼š");
 		int cout = (int)getch() - 48;
 		printf("%d\n", cout);
 		for (int i = 0;i < cout;i++)
 		{
-			printf("\nÇëÊäÈëµÚ%d¸öÔªËØ£º", i + 1);
+			printf("\nè¯·è¾“å…¥ç¬¬%dä¸ªå…ƒç´ ï¼š", i + 1);
 			char temp = getch();
 			printf("%c\n", temp);
 			Push(S, temp);
 		}
-		printf("\nÑ¹Õ»ÒÑÍê³É£¬°´ÈÎÒâ¼ü·µ»Ø¡£\n");
+		printf("\nå‹æ ˆå·²å®Œæˆï¼ŒæŒ‰ä»»æ„é”®è¿”å›ã€‚\n");
 	}
 		  break;
 	case 2: {
-		S.top != S.base?printf("ÔªËØ%cÒÑ³öÕ»\n\n°´ÈÎÒâ¼ü·µ»Ø", Pop(S)):printf("Õ»Îª¿Õ£¬É¾³ıÊ§°Ü¡£\n\n°´ÈÎÒâ¼ü·µ»Ø");
+		S.top != S.base?printf("å…ƒç´ %cå·²å‡ºæ ˆ\n\næŒ‰ä»»æ„é”®è¿”å›", Pop(S)):printf("æ ˆä¸ºç©ºï¼Œåˆ é™¤å¤±è´¥ã€‚\n\næŒ‰ä»»æ„é”®è¿”å›");
 	}
 		  break;
 	case 3: {
-		printf("\nÕ»¶¥ÔªËØÎª£º%c\n", GetTop(S));
+		printf("\næ ˆé¡¶å…ƒç´ ä¸ºï¼š%c\n", GetTop(S));
 	}
 		  break;
 	case 4: {
-		printf("\nÕ»µÄ³¤¶ÈÎª£º%d\n", StackLength(S));
+		printf("\næ ˆçš„é•¿åº¦ä¸ºï¼š%d\n", StackLength(S));
 	}
 		  break;
 	case 5: {
-		cout <<endl<< "Õ»ÊÇ·ñÎª¿Õ:" << boolalpha << StackEmpty(S) << endl;
+		cout <<endl<< "æ ˆæ˜¯å¦ä¸ºç©º:" << boolalpha << StackEmpty(S) << endl;
 	}
 		  break;
 	case 6: {
@@ -165,7 +158,7 @@ void UI(SqStack &S)
 	case 0:exit(1);
 		break;
 	default: {
-		printf("\nÄúÊäÈëµÄÖ¸ÁîÓĞÎó£¬ÇëÖØĞÂÊäÈë0~6Ö®¼äµÄÊı×Ö");
+		printf("\næ‚¨è¾“å…¥çš„æŒ‡ä»¤æœ‰è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥0~6ä¹‹é—´çš„æ•°å­—");
 	}
 		break;
 	}
@@ -178,8 +171,8 @@ int main()
 	char e;
 	SqStack S;
 	IntStack(S);
-	printf("Ë³ĞòÕ»ÒÑ³õÊ¼»¯\n");
-	cout << "Õ»ÊÇ·ñÎª¿Õ:" << boolalpha << StackEmpty(S) << endl;
+	printf("é¡ºåºæ ˆå·²åˆå§‹åŒ–\n");
+	cout << "æ ˆæ˜¯å¦ä¸ºç©º:" << boolalpha << StackEmpty(S) << endl;
 	while (1)
 	{
 		system("cls");
